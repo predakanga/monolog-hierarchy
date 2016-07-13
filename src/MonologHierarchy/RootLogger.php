@@ -7,7 +7,6 @@
 
 namespace MonologHierarchy;
 
-use Monolog\Logger as BaseLogger;
 use MonologHierarchy\Exceptions\DeprecationException;
 
 class RootLogger extends HierarchicalLogger {
@@ -15,14 +14,23 @@ class RootLogger extends HierarchicalLogger {
      * @var LoggerManager
      */
     protected $manager;
+    /**
+     * @var bool
+     */
+    protected $strictMode;
 
-    public function __construct($name, $handlers, $processors, LoggerManager $manager) {
+    public function __construct($name, $handlers, $processors, LoggerManager $manager, $strictMode = false) {
         $this->manager = $manager;
         parent::__construct($name, $handlers, $processors);
+        $this->strictMode = $strictMode;
     }
 
     public function withName($name) {
-        throw new DeprecationException("Logger::withName is not usable with LoggerHierarchy instances. Use getLogger instead.");
+        if($this->strictMode) {
+            throw new DeprecationException("Logger::withName is not usable with LoggerHierarchy instances. Use getLogger instead.");
+        } else {
+            return $this->getLogger($name);
+        }
     }
 
     public function getLogger(string $name) {
