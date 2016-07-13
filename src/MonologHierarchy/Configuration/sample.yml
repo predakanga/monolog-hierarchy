@@ -1,0 +1,13 @@
+defaults:
+  level: ERROR
+
+loggers:
+  pack.security:
+    level: WARNING
+    handlers:
+      AmqpHandler:
+        exchangeName: security_log
+        level: INFO
+      NativeMailHandler:
+        to: logs@example.com
+        subject: Security log

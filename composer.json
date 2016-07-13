@@ -1,0 +1,21 @@
+{
+  "name": "predakanga/monolog-hierarchy",
+  "description": "Provides a wrapper for Monolog Loggers that lets you build a hierarchy of loggers, inheriting their configurations",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Lachlan Pease",
+      "email": "predatory.kangaroo@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.0",
+    "monolog/monolog": "^1.20"
+  },
+  "autoload": {
+    "psr-4": {
+      "MonologHierarchy\\": "src/MonologHierarchy/"
+    }
+  }
+}
