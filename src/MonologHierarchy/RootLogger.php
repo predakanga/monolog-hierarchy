@@ -19,7 +19,7 @@ class RootLogger extends HierarchicalLogger {
      */
     protected $strictMode;
 
-    public function __construct($name, $handlers, $processors, LoggerManager $manager, $strictMode = false) {
+    public function __construct($name, $handlers, $processors, LoggerManager $manager, bool $strictMode = false) {
         $this->manager = $manager;
         parent::__construct($name, $handlers, $processors);
         $this->strictMode = $strictMode;

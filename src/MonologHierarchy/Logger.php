@@ -7,8 +7,6 @@
 
 namespace MonologHierarchy;
 
-use Monolog\Handler\HandlerInterface;
-use MonologHierarchy\Exceptions\DeprecationException;
 use MonologHierarchy\Handlers\HierarchyHandler;
 
 class Logger extends RootLogger {
@@ -17,11 +15,11 @@ class Logger extends RootLogger {
      */
     protected $hierarchyHandler;
 
-    public function __construct($name, $handlers, $processors, LoggerManager $manager) {
+    public function __construct($name, $handlers, $processors, LoggerManager $manager, bool $strictMode = false) {
         $this->hierarchyHandler = new HierarchyHandler($manager, $manager->getParentName($name));
         array_push($handlers, $this->hierarchyHandler);
 
-        parent::__construct($name, $handlers, $processors, $manager);
+        parent::__construct($name, $handlers, $processors, $manager, $strictMode);
     }
 
     // N.B. Turns out Monolog uses pop and push differently from the rest of the world.
